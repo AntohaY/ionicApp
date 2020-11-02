@@ -1,4 +1,16 @@
 <div id="container">
-  <strong>{{ name }}</strong>
-  <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div>
+    <ion-item>
+      <ion-label position="floating">{{name}}</ion-label>
+      <ion-input color="success" [(ngModel)]="inputValue" clearInput></ion-input>
+    </ion-item>
+  </div>
+
+  <ion-button on-click="classifyText()" color="tertiary">Analyse</ion-button>
+
+  <div>
+    <ion-chip [hidden]="hideChip" color="{{ analysisResult === 'Positive' ? 'success' : 'danger' }}">
+      <ion-label>Your text is {{ analysisResult }}</ion-label>
+    </ion-chip>
+  </div>
 </div>
