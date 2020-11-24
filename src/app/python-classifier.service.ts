@@ -9,7 +9,7 @@ export class PythonClassifierService {
 
   constructor(private http: HttpClient,) { }
 
-  private serverAddress = "http://127.0.0.1:5000/";
+  private serverAddress = "https://sentiment-analysis-anton.herokuapp.com/";
 
   getSentiment(text) {
     return this.http.get(`${this.serverAddress}classify`,

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { PythonClassifierService } from "../python-classifier.service";
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class ExploreContainerComponent implements OnInit {
   hideChip: boolean;
   inputValue: string;
 
-  constructor(private classifierService: PythonClassifierService) { }
+  constructor(private classifierService: PythonClassifierService, public toastController: ToastController) { }
 
   ngOnInit() {
     this.hideChip = true;
@@ -23,14 +23,25 @@ export class ExploreContainerComponent implements OnInit {
 
   classifyText() {
     this.classifierService.getSentiment(this.inputValue)
-        .subscribe((data: any) => {
-          console.log(data);
-          if (data) {
-            this.hideChip = false;
-            this.analysisResult = data.result;
-          }
-          console.log(this.analysisResult);
-        })
+        .subscribe(
+            (data: any) => {
+                this.hideChip = false;
+                this.analysisResult = data.result;
+                console.log(data);
+            },
+            error => this.presentToast('Something went wrong', "danger")
+        );
   }
+
+    async presentToast(message, color) {
+        const toast = await this.toastController.create({
+            message,
+            duration: 3000,
+            position: "bottom",
+            animated: true,
+            color: color ? color: ""
+        });
+        toast.present();
+    }
 
 }
