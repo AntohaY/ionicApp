@@ -29,7 +29,7 @@ export class ExploreContainerComponent implements OnInit {
                 this.analysisResult = data.result;
                 console.log(data);
             },
-            error => this.presentToast('Something went wrong', "danger")
+            error => this.presentToast(error, "danger")
         );
   }
 

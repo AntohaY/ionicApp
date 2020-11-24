@@ -9,7 +9,7 @@
   <ion-button on-click="classifyText()" color="tertiary">Analyse</ion-button>
 
   <div>
-    <ion-chip [hidden]="hideChip" color="{{ analysisResult === 'Positive' ? 'success' : 'danger' }}">
+    <ion-chip on-click="hideChip = !hideChip" [hidden]="hideChip" color="{{ analysisResult === 'Positive' ? 'success' : 'danger' }}">
       <ion-label>Your text is {{ analysisResult }}</ion-label>
     </ion-chip>
   </div>
